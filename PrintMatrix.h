@@ -4,14 +4,14 @@
 
 void printMatrix(vector <vector <long double>>& mas, int size, int numCols = -1);
 void printMatrix(vector <vector <long double>>& mas, int size, int numCols) {
-    cout << "\nÂûâîä ìàòðèöû:\n";
+    cout << "\nÐ’Ñ‹Ð²Ð¾Ð´ Ð¼Ð°Ñ‚Ñ€Ð¸Ñ†Ñ‹:\n";
     int Elem;
     char Ch;
-    // Îïðåäåëèòü êîëè÷åñòâî ñòîëáöîâ, åñëè íå óêàçàíî
+    // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚ÑŒ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ð¾Ð»Ð±Ñ†Ð¾Ð², ÐµÑÐ»Ð¸ Ð½Ðµ ÑƒÐºÐ°Ð·Ð°Ð½Ð¾
     if (numCols == -1) {
         numCols = mas[0].size();
     }
-    // Âûâåñòè çàãîëîâêè ñòîëáöîâ
+    // Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ¸ ÑÑ‚Ð¾Ð»Ð±Ñ†Ð¾Ð²
     for (Elem = 1; Elem <= numCols; Elem++)
         cout << setw(14) << Elem;
     cout << endl;
@@ -35,5 +35,11 @@ void printMatrix(vector <vector <long double>>& mas, int size, int numCols) {
 
     cin.get(Ch);
 }
-
+void transpose_m(vector <vector <long double>>& mas, vector <vector <long double>>& mas1, int size);
+void transpose_m(vector <vector <long double>>& mas, vector <vector <long double>>& mas1, int size) {
+    int i, j;
+    for (i = 0; i < size; i++)
+        for (j = 0; j < size; j++)
+            mas1[i][j] = mas[j][i];
+}
 #endif
