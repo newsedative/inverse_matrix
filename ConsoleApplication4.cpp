@@ -1,8 +1,11 @@
-﻿#include "mainM.h";
+#include "mainM.h";
 #include "PrintMatrix.h";
 #include "FillMet.h";
 #include "InverseMatr.h";
 #include "Mult.h";
+#include "DetMatr.h";
+
+
 
 int main() {
     setlocale(0, "");
@@ -41,19 +44,30 @@ int main() {
 
     printMatrix(matrix, N);
 
-    vector <vector <long double>> inverted_matrix(N, vector<long double>(N));
-    inverse_matrix(matrix, N, inverted_matrix);
 
-    cout << "\nОбратная матрица:\n";
-    printMatrix(inverted_matrix, N);
 
-    cout << "\nРезультат умнжения исходной на обратную:\n";
-    vector<vector<long double>> multipl_m = matrix_multiply(matrix, inverted_matrix);
-    printMatrix(multipl_m, N);
+    // проверка на вырожденность матрицы
+    long double det_1;
+    det_1 = det_rec(matrix, N, 1);
+    if (det_1 == 0)
+        cout << "\nОпределитель матрицы равен 0 - матрица вырожденная" << endl;
+    else {
+        vector <vector <long double>> inverted_matrix(N, vector<long double>(N));
+        inverse_matrix(matrix, N, inverted_matrix);
+        cout << "\nОпределитель матрицы равен:" << det_1 << endl;
+        cout << "\nОбратная матрица:\n";
+        vector <vector <long double>> tek_m(N, vector<long double>(N));
+        transpose_m(inverted_matrix, tek_m, N);
+        printMatrix(tek_m, N);
 
-    cout << "\nРезультат умнжения обратной на исходную:\n";
-    vector<vector<long double>> multipl_m1 = matrix_multiply(inverted_matrix, matrix);
-    printMatrix(multipl_m1, N);
+        cout << "\nРезультат умнжения исходной на обратную:\n";
+        vector<vector<long double>> multipl_m = matrix_multiply(matrix, inverted_matrix);
+        printMatrix(multipl_m, N);
+
+        cout << "\nРезультат умнжения обратной на исходную:\n";
+        vector<vector<long double>> multipl_m1 = matrix_multiply(inverted_matrix, matrix);
+        printMatrix(multipl_m1, N);
+    }
 
 
     return 0;
